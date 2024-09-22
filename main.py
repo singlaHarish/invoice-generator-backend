@@ -1,16 +1,16 @@
-from flask import Flask
-from flask_cors import CORS, cross_origin
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = Flask(__name__)
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-
-@app.route('/hello')
-def hello_world():
+@app.get('/hello')
+async def hello_world():
     return 'Hello, World!!!'
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    app.run()
