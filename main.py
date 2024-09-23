@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+app = FastAPI(
+    title="Invoice generator backend application",
+    description="Invoice generator backend application",
+    version="1.0.0"
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,3 +18,5 @@ app.add_middleware(
 @app.get('/hello')
 async def hello_world():
     return 'Hello, World!!!'
+
+#app.include_router(memoitems.router, prefix="/api/v1/memo/items", tags=["MemoItems"])
