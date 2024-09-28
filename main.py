@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.controllers import CreateMemoItem
+
 app = FastAPI(
     title="Invoice generator backend application",
     description="Invoice generator backend application",
@@ -19,4 +21,4 @@ app.add_middleware(
 async def hello_world():
     return 'Hello, World!!!'
 
-#app.include_router(memoitems.router, prefix="/api/v1/memo/items", tags=["MemoItems"])
+app.include_router(CreateMemoItem.router, prefix="/memo/items", tags=["MemoItems"])

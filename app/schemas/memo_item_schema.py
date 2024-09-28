@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 
 
-class MemoItem(BaseModel):
+class MemoItemCreate(BaseModel):
     itemType: str
     itemSubType: str
-    pricePerQuantity: float
+    ratePerItem: float
     quantity: float
-    total: float
+    price: float

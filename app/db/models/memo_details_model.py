@@ -1,0 +1,16 @@
+from sqlalchemy.orm import relationship
+
+from app.db.base import Base
+from sqlalchemy import Column, Integer, String, Date, Float
+
+
+class MemoDetails(Base):
+    __tablename__ = "MEMO_DETAILS"
+
+    memo_id = Column(Integer, primary_key=True, index=True)
+    customer_name = Column(String(100), nullable=False)
+    invoice_date = Column(Date, nullable=False)
+    bill_amount = Column(Float, nullable=False)
+
+    children = relationship("MemoItem", back_populates="parent", cascade="all, delete-orphan")
+
