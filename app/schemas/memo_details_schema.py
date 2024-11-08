@@ -10,6 +10,6 @@ class MemoDetailsCreate(BaseModel):
     customerName: str
     address: str
     contact: str
-    invoiceDate: date
+    invoiceDate: str
     memoItems: List[MemoItemCreate]
-    billAmount: float
+    billAmount: str

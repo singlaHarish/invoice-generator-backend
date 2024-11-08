@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fastapi import APIRouter, HTTPException, Depends
 from mysql.connector import Error
 from sqlalchemy.orm import Session
@@ -14,8 +16,12 @@ router = APIRouter()
 async def create_memo(requestItem: MemoDetailsCreate, db: Session = Depends(get_db)):
     try:
         print("MemoDetailsModel type:", type(MemoDetailsModel))
+        date_str = requestItem.invoiceDate
+        date_obj = datetime.strptime(date_str, "%m/%d/%Y").date()
         memo_details = MemoDetailsModel(customer_name=requestItem.customerName,
-                                        invoice_date=requestItem.invoiceDate,
+                                        address=requestItem.address,
+                                        contact=requestItem.contact,
+                                        invoice_date=date_obj,
                                         bill_amount=requestItem.billAmount)
 
         for memoItem in requestItem.memoItems:
