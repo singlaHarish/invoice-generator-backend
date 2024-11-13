@@ -10,6 +10,9 @@ COPY . .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install uvicorn if not already listed in requirements.txt
+RUN pip install uvicorn
+
 # Expose the port that the app runs on
 EXPOSE 8080
 
