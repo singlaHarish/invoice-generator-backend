@@ -18,5 +18,5 @@ COPY invoice-generator-backend $APP_HOME/invoice-generator-backend
 EXPOSE 8080
 
 # Command to run the application
-CMD ["uvicorn", "invoice-generator-backend.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "invoice-generator-backend.main:app", "--bind", "0.0.0.0:8080"]
 
