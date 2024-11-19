@@ -4,4 +4,5 @@ pydantic==2.9.2
 SQLAlchemy==2.0.35
 mysql-connector-python==8.0.28
 uvicorn==0.29.0
+gunicorn==23.0.0
 
