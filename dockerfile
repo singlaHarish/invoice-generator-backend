@@ -15,5 +15,3 @@ EXPOSE 8080
 
 # Command to run the application
 CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8080", "main:app"]
-
-
