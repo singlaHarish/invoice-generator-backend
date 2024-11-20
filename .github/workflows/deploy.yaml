@@ -23,6 +23,7 @@ jobs:
         with:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: artifact-registry
 
       - name: Configure Docker for GCP
         run: |
