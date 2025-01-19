@@ -1,10 +1,8 @@
-import mysql
-from mysql.connector import Error
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "mysql+mysqlconnector://test:test@test:test/invoice_generator_app"
+DATABASE_URL = "mysql+mysqlconnector://root:abcde12345@192.168.0.176:3306/invoicegen"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
