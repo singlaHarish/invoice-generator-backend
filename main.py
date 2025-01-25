@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.controllers import CreateMemoItem
 
@@ -16,16 +17,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# @app.options("/{path:path}")
-# async def preflight_handler(path: str):
-#     return
+@app.options("/{path:path}")
+async def preflight_handler(path: str):
+    return
+
+@app.middleware("http")
+async def ensure_https(request: Request, call_next):
+    # If request is HTTP, redirect to HTTPS
+    if not request.url.scheme == "https":
+        url = request.url.replace(scheme="https")
+        return RedirectResponse(url=url)
+    response = await call_next(request)
+    return response
 
 @app.get('/hello')
 async def hello_world():
     return 'Hello, World!!!'
 
-@app.post("/test-cors")
-async def test_cors():
-    return {"message": "CORS settings working correctly"}
 
 app.include_router(CreateMemoItem.router, prefix="/memo/items", tags=["MemoItems"])
