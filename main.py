@@ -21,12 +21,18 @@ app.add_middleware(
 async def preflight_handler(path: str):
     return
 
+
 @app.middleware("http")
 async def ensure_https(request: Request, call_next):
+    # Allow preflight (OPTIONS) requests to pass through
+    if request.method == "OPTIONS":
+        return await call_next(request)
+
     # If request is HTTP, redirect to HTTPS
-    if not request.url.scheme == "https":
+    if request.url.scheme != "https":
         url = request.url.replace(scheme="https")
         return RedirectResponse(url=url)
+
     response = await call_next(request)
     return response
 
