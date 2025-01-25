@@ -31,10 +31,10 @@ async def create_memo(requestItem: MemoDetailsCreate, db: Session = Depends(get_
                                       price=memoItem.price)
             memo_details.children.append(memo_item)
 
-        # db.add(memo_details)
-        # db.commit()
-        # db.refresh(memo_details)
-        logger.info("Request reached here, no db for now")
+        db.add(memo_details)
+        db.commit()
+        db.refresh(memo_details)
+        logger.info("Request logged successfully")
         return {"message": "Data added successfully", "memo_id": memo_details.memo_id}
     except Error as e:
         logger.error(f"Exception occurred during request: {requestItem}", exc_info=True)

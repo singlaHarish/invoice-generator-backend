@@ -2,8 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "mysql+mysqlconnector://root:abcde12345@192.168.0.176:3306/invoicegen"
-#DATABASE_URL = "mysql+mysqlconnector://root:abcde12345@localhost:3306/invoicegen"
+DATABASE_URL = "mysql+mysqlconnector://root:12345@localhost:3306/invoicegen"
 
 
 engine = create_engine(DATABASE_URL)
