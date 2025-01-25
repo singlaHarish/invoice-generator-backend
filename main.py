@@ -1,6 +1,3 @@
-import logging
-import sys
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -19,14 +16,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logger
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)]
-)
-
-logger = logging.getLogger(__name__)
 
 
 @app.options("/{path:path}")

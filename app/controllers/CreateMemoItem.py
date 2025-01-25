@@ -4,11 +4,11 @@ from fastapi import APIRouter, HTTPException, Depends
 from mysql.connector import Error
 from sqlalchemy.orm import Session
 
+from app.logging.logConfig import logger
 from app.schemas.memo_details_schema import MemoDetailsCreate
 from app.db.base import get_db
 from app.db.models.memo_details_model import MemoDetails as MemoDetailsModel
 from app.db.models.memo_item_model import MemoItem as MemoItemModel
-from main import logger
 
 router = APIRouter()
 
