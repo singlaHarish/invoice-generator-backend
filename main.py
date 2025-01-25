@@ -25,4 +25,4 @@ async def hello_world():
     return 'Hello, World!!!'
 
 
-app.include_router(CreateMemoItem.router, prefix="/memo/items", tags=["MemoItems"])
+app.include_router(CreateMemoItem.router, prefix="/memo", tags=["MemoItems"])

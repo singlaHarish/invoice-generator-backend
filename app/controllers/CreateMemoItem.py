@@ -12,7 +12,7 @@ from app.db.models.memo_item_model import MemoItem as MemoItemModel
 router = APIRouter()
 
 
-@router.post
+@router.post("/items")
 async def create_memo(requestItem: MemoDetailsCreate, db: Session = Depends(get_db)):
     try:
         print("MemoDetailsModel type:", type(MemoDetailsModel))
