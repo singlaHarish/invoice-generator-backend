@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.controllers import CreateMemoItem
+from app.controllers import CreateMemoItem, GetMemoItems
+from app.db.base import Base, engine
 
 app = FastAPI(
     title="Invoice generator backend application",
@@ -16,6 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Create tables on app start
+Base.metadata.create_all(bind=engine)  # This creates the tables before any requests are processed
 
 
 @app.options("/{path:path}")
@@ -28,3 +31,4 @@ async def hello_world():
 
 
 app.include_router(CreateMemoItem.router, prefix="/memo", tags=["MemoItems"])
+app.include_router(GetMemoItems.router, prefix="/memo", tags=["MemoItems"])

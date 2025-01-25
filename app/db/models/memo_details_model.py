@@ -1,6 +1,6 @@
 from sqlalchemy.orm import relationship
 
-from app.db.base import Base
+from app.db.base import Base, engine
 from sqlalchemy import Column, Integer, String, Date, Float
 
 
@@ -16,3 +16,6 @@ class MemoDetails(Base):
 
     children = relationship("MemoItem", back_populates="parent", cascade="all, delete-orphan")
 
+
+# # Create the database tables
+# Base.metadata.create_all(bind=engine)

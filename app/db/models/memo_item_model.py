@@ -1,8 +1,7 @@
 from sqlalchemy.orm import relationship
 
-from app.db.base import Base
+from app.db.base import Base, engine
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
-
 
 class MemoItem(Base):
     __tablename__ = "MEMO_ITEM"
@@ -17,3 +16,6 @@ class MemoItem(Base):
 
     parent = relationship("MemoDetails", back_populates="children")
 
+
+# # Create the database tables
+# Base.metadata.create_all(bind=engine)

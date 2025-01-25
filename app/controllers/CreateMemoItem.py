@@ -1,16 +1,15 @@
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import HTTPException, Depends
 from mysql.connector import Error
 from sqlalchemy.orm import Session
 
-from app.logging.logConfig import logger
-from app.schemas.memo_details_schema import MemoDetailsCreate
+from app.config.logConfig import logger
+from app.config.routerConfig import router
 from app.db.base import get_db
 from app.db.models.memo_details_model import MemoDetails as MemoDetailsModel
 from app.db.models.memo_item_model import MemoItem as MemoItemModel
-
-router = APIRouter()
+from app.schemas.memo_details_schema import MemoDetailsCreate
 
 
 @router.post("/items")
