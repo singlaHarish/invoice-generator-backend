@@ -10,14 +10,22 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# @app.options("/{path:path}")
+# async def preflight_handler(path: str):
+#     return
+
 @app.get('/hello')
 async def hello_world():
     return 'Hello, World!!!'
+
+@app.post("/test-cors")
+async def test_cors():
+    return {"message": "CORS settings working correctly"}
 
 app.include_router(CreateMemoItem.router, prefix="/memo/items", tags=["MemoItems"])
