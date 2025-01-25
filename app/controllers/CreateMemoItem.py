@@ -8,6 +8,7 @@ from app.schemas.memo_details_schema import MemoDetailsCreate
 from app.db.base import get_db
 from app.db.models.memo_details_model import MemoDetails as MemoDetailsModel
 from app.db.models.memo_item_model import MemoItem as MemoItemModel
+from main import logger
 
 router = APIRouter()
 
@@ -35,5 +36,6 @@ async def create_memo(requestItem: MemoDetailsCreate, db: Session = Depends(get_
         db.refresh(memo_details)
         return {"message": "Data added successfully", "memo_id": memo_details.memo_id}
     except Error as e:
+        logger.error(f"Exception occurred during request: {requestItem}", exc_info=True)
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
