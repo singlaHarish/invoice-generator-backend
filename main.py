@@ -1,6 +1,5 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
 
 from app.controllers import CreateMemoItem
 
@@ -20,21 +19,6 @@ app.add_middleware(
 @app.options("/{path:path}")
 async def preflight_handler(path: str):
     return
-
-
-@app.middleware("http")
-async def ensure_https(request: Request, call_next):
-    # Allow preflight (OPTIONS) requests to pass through
-    if request.method == "OPTIONS":
-        return await call_next(request)
-
-    # If request is HTTP, redirect to HTTPS
-    if request.url.scheme != "https":
-        url = request.url.replace(scheme="https")
-        return RedirectResponse(url=url)
-
-    response = await call_next(request)
-    return response
 
 @app.get('/hello')
 async def hello_world():
